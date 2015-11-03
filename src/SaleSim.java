@@ -53,7 +53,7 @@ public class SaleSim extends Application {
             n.setHouseAt(i, h);
         }
 
-        SalesbotSimple s = new SalesbotSimple(n);
+        SalesbotGreedy s = new SalesbotGreedy(n);
         House[] path = s.findPath();
 
         // Draw the grid

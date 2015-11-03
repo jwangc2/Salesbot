@@ -60,13 +60,13 @@ public class SaleSim extends Application {
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(1);
    
-        for (int c = 1; c < grid_w / 2; c ++) {
+        for (int c = 1; c <= grid_w / 2; c ++) {
             gc.strokeLine(gridToCanvasX(c), 0, gridToCanvasX(c), canvas_h);
             gc.strokeLine(gridToCanvasX(-c), 0, gridToCanvasX(-c), canvas_h);
         }
         gc.strokeLine(gridToCanvasX(0), 0.0, gridToCanvasX(0), canvas_h);
         
-        for (int r = 1; r < grid_h / 2; r ++) {
+        for (int r = 1; r <= grid_h / 2; r ++) {
             gc.strokeLine(0.0, gridToCanvasY(r), canvas_w, gridToCanvasY(r));
             gc.strokeLine(0.0, gridToCanvasY(-r), canvas_w, gridToCanvasY(-r));
         }

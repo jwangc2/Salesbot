@@ -7,6 +7,6 @@ public class SalesbotSimple extends Salesbot {
 
     @Override
     public House[] findPath() {
-        return neighborhood.getHouses();
+        return mHood.getHouses();
     }
 }
