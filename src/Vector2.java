@@ -28,4 +28,9 @@ public class Vector2 {
     public Vector2 scale(int c) {
         return new Vector2(this.x * c, this.y * c);
     }
+
+    @Override
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
+    }
 }

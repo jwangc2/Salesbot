@@ -9,7 +9,15 @@ public class Neighborhood {
         houses = new House[Neighborhood.NumHouses];
     }
 
+    public void setHouseAt(int index, House newHouse) {
+        houses[index] = newHouse;
+    }
+
     public House[] getHouses() {
         return houses;
+    }
+
+    public int getNumHouses() {
+        return Neighborhood.NumHouses;
     }
 }

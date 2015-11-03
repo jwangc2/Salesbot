@@ -8,4 +8,12 @@ public class Neighborhood {
     public Neighborhood() {
         houses = new House[Neighborhood.NumHouses];
     }
+
+    public House[] getHouses() {
+        return houses;
+    }
+
+    public int getNumHouses() {
+        return Neighborhood.NumHouses;
+    }
 }

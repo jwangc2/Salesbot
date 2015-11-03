@@ -14,8 +14,7 @@ public class Vector2 {
     }
 
     public Vector2(Vector2 orig) {
-        this.x = orig.x;
-        this.y = orig.y;
+        this(orig.x, orig.y);
     }
 
     public Vector2 sub(Vector2 other) {
@@ -28,5 +27,10 @@ public class Vector2 {
 
     public Vector2 scale(int c) {
         return new Vector2(this.x * c, this.y * c);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ");
     }
 }
