@@ -9,4 +9,9 @@ public class SalesbotSimple extends Salesbot {
     public House[] findPath() {
         return mHood.getHouses();
     }
+
+    @Override
+    public String toString() {
+        return "Simple Salesbot";
+    }
 }

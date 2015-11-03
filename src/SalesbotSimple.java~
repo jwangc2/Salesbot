@@ -1,8 +1,8 @@
 package Salesbot;
 
 public class SalesbotSimple extends Salesbot {
-    public SalesbotSimple(Neighborhood neighborhood) {
-        super(neighborhood);
+    public SalesbotSimple(Neighborhood n) {
+        super(n);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package Salesbot;
 
 public abstract class Salesbot {
-    private Neighborhood mHood;
-    private Vector2 mPos;
+    protected Neighborhood mHood;
+    protected Vector2 mPos;
     
     public Salesbot(Neighborhood neighborhood) {
         mHood = neighborhood;

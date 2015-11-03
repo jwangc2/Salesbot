@@ -18,4 +18,9 @@ public abstract class Salesbot {
     public Vector2 getPosition() {
         return mPos;
     }
+
+    @Override
+    public String toString() {
+        return "Salesbot";
+    }
 }
