@@ -84,7 +84,7 @@ public class SaleSim extends Application {
         int hrad = grid_size / 8;
         for (i = 1; i < s.getHood().getNumHouses(); i ++) {
             // Control house radius
-            if (i % 3 == 0)
+            if (i % 2 == 0)
                 hrad += 2;
 
             // Draw the house first
