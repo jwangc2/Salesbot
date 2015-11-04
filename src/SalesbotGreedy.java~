@@ -33,4 +33,9 @@ public class SalesbotGreedy extends Salesbot {
 
         return path;        
     }
+
+    @Override
+    public String toString() {
+        return "Greedy Salesbot";
+    }
 }

@@ -3,6 +3,7 @@ package Salesbot;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// A vertical implementation of the Salesbot
 public class SalesbotVert extends Salesbot {
     public SalesbotVert(Neighborhood n) {
         super(n);
@@ -31,5 +32,10 @@ public class SalesbotVert extends Salesbot {
         }
 
         return path;
+    }
+
+    @Override
+    public String toString() {
+        return "Vertical Salesbot";
     }
 }

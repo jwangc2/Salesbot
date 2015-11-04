@@ -1,13 +1,17 @@
 package Salesbot;
 
+// A simple vector class
 public class Vector2 {
+    // Public members (exposed for ease)
     public int x;
     public int y;
 
+    // Public Static Methods
     public static double distanceSq(Vector2 a, Vector2 b) {
         return ( Math.pow(a.y - b.y, 2) + Math.pow(a.x - b.x, 2) );
     }
 
+    // Constructors
     public Vector2(int x, int y) {
         this.x = x;
         this.y = y;    
@@ -17,6 +21,7 @@ public class Vector2 {
         this(orig.x, orig.y);
     }
 
+    // Public Member Methods
     public Vector2 sub(Vector2 other) {
         return new Vector2(this.x - other.x, this.y - other.y);
     }

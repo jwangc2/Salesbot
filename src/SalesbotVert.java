@@ -3,11 +3,15 @@ package Salesbot;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// A vertical implementation of the Salesbot
 public class SalesbotVert extends Salesbot {
+
+    // Constructor
     public SalesbotVert(Neighborhood n) {
         super(n);
     }
 
+    // Algorithm
     @Override
     public House[] findPath() {
         int size = mHood.getNumHouses();

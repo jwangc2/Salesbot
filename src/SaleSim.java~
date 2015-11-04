@@ -14,42 +14,57 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 
+// The simulator and application
 public class SaleSim extends Application {
 
+    // Grid constraints
     int grid_size = 32;
     int grid_w = 12;
     int grid_h = 10;
 
+    // Determine the size of the canvas (in pixels)
     double canvas_w = (grid_w + 2) * grid_size;
     double canvas_h = (grid_h + 2) * grid_size;
 
+    // Put (0, 0) at the center of the canvas
     double xoff = canvas_w / 2;
     double yoff = canvas_h / 2;
 
+    // Salesmen variables
     Salesbot[] salesmen;
     int numSalesmen = 3;
 
+    Random random;
+
+    // Launch the applicaiton
     public static void main(String[] args) {
         launch(args);
     }
 
-    Random random;
-
+    // Start the application
     @Override
     public void start(Stage primaryStage) {
+        // Setup
         primaryStage.setTitle("Travelling Salesman");
         Group root = new Group();
+
+        // Create and draw to canvas
         Canvas canvas = new Canvas(canvas_w, canvas_h);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         drawSim(gc);
         root.getChildren().add(canvas);
+
+        // Create scene and show it
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
+    // Biggest chunk of the code, simulates and draws it to the canvas
     private void drawSim(GraphicsContext gc) {
+        // Request the command line params, which will be used to determine the seed and salesbot type
         List<String> params = this.getParameters().getRaw();
 
+        // Seed the rng
         int seed = 1337;
         if (params.size() >= 1)
             seed = Integer.parseInt(params.get(0));
@@ -61,8 +76,7 @@ public class SaleSim extends Application {
         for (int i = 0; i < n.getNumHouses(); i ++) {
             int xpos = random.nextInt(grid_w) - (grid_w / 2);
             int ypos = random.nextInt(grid_h) - (grid_h / 2);
-            House h = new House(xpos, ypos);
-            n.setHouseAt(i, h);
+            n.setHouseAt(i, new House(xpos, ypos););
         }
 
         // Draw the grid
@@ -81,28 +95,32 @@ public class SaleSim extends Application {
         }
         gc.strokeLine(0.0, gridToCanvasY(0), canvas_w, gridToCanvasY(0));
 
-        // Determine the salesman to use
+        // Define all salesmen and their colors
         Color[] colors = { Color.BLUE, Color.ORANGE, Color.PURPLE };
         Salesbot[] salesmen = { new SalesbotSimple(n),
                                 new SalesbotVert(n),
                                 new SalesbotGreedy(n) };
 
-        // Parse from the launch args
+        // Parse which salesman from the launch args (2nd argument)
         int sID = 0;
         if (params.size() >= 2)
             sID = Integer.parseInt(params.get(1)) % numSalesmen;
 
         // Draw either all, or one
         if (sID < 0) {  
+            // Gotta draw 'em all
             for (int i = 0; i < numSalesmen; i ++) {
                 drawPath(gc, salesmen[i], colors[i]);
                 System.out.println();
             }
         } else {
+            // Draw a single salesman's path
             drawPath(gc, salesmen[sID], colors[sID]);
+            System.out.println();
         }
     }
 
+    // Draws the path for a given salesbot
     private void drawPath(GraphicsContext gc, Salesbot s, Color pathCol) {
         House[] path = s.findPath();
         System.out.println("Using: " + s);
@@ -124,13 +142,13 @@ public class SaleSim extends Application {
                 hrad += 2;
 
             // Draw the house first
-            drawHouse(gc, path[i - 1], hrad, pathCol);
+            drawCircle(gc, path[i - 1].getPosition(), hrad, pathCol);
 
             // Then draw a line from that house to the house after it
             drawLine(gc, path[i - 1].getPosition(), path[i].getPosition());
         }
         // Also don't forget the last house
-        drawHouse(gc, path[i - 1], hrad, pathCol);
+        drawCircle(gc, path[i - 1].getPosition(), hrad, pathCol);
 
         // Determine length of the path
         gc.setLineWidth(1);
@@ -138,22 +156,20 @@ public class SaleSim extends Application {
         System.out.println("Total Distance: " + calcTotalDistance(s.getPosition(), path, s.getHood().getNumHouses()));
     }
 
-    private void drawHouse(GraphicsContext gc, House h, int rad, Color col) {
-        Vector2 pos = h.getPosition();
-        drawCircle(gc, pos, rad, col);
-    }
-
+    // Draw a circle (grid positions)
     private void drawCircle(GraphicsContext gc, Vector2 pos, int rad, Color col) {
-        Paint p = gc.getStroke();
-        gc.setStroke(col);
+        Paint p = gc.getStroke();   // Save the stroke
+        gc.setStroke(col);          // New stroke based on color
         gc.strokeOval(gridToCanvasX(pos.x) - rad, gridToCanvasY(pos.y) - rad, rad * 2, rad * 2);
-        gc.setStroke(p);
+        gc.setStroke(p);            // Restore the previous stroke
     }
 
+    // Draw a line (grid positions)
     private void drawLine(GraphicsContext gc, Vector2 posA, Vector2 posB) {
         gc.strokeLine(gridToCanvasX(posA.x), gridToCanvasY(posA.y), gridToCanvasX(posB.x), gridToCanvasY(posB.y));
     }
 
+    // Toolset
     private double gridToCanvasX(int coord) {
         return ( xoff + (coord * grid_size) );
     }
