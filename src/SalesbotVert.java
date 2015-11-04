@@ -11,27 +11,28 @@ public class SalesbotVert extends Salesbot {
         super(n);
     }
 
-    // Algorithm
+    // Algorithm sorts from bottom to top
     @Override
     public House[] findPath() {
         int size = mHood.getNumHouses();
-        House[] path = new House[size];
-        ArrayList<House> houseList = new ArrayList<House>(Arrays.asList(mHood.getHouses()));
+        House[] path = mHood.getHouses();
 
-        for (int i = 0; i < size; i ++) {
-            int bPosY = houseList.get(0).getPosition().y;
-            int bNdx = 0;
+        for (int n = 0; n < size; n ++) {
 
-            for (int ndx = 0; ndx < houseList.size(); ndx ++) {
-                Vector2 pos = houseList.get(ndx).getPosition();
-                if (pos.y > bPosY) {
-                    bPosY = pos.y;
-                    bNdx = ndx;
+            boolean swapped = false;
+            for (int i = 1; i < size; i ++) {
+                if (path[i].getPosition().y < path[i - 1].getPosition().y) {
+                    // swap
+                    House save = path[i - 1];
+                    path[i - 1] = path[i];
+                    path[i] = save;
+                    swapped = true;
                 }
             }
 
-            path[i] = houseList.get(bNdx);
-            houseList.remove(bNdx);
+            // Check for solved solution (ie: no swaps made)
+            if (!swapped)
+                break;
         }
 
         return path;

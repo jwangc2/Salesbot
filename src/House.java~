@@ -1,6 +1,6 @@
 package Salesbot;
 
-// A "house" for the salesbot to travel to
+// A "house" for the salesbot to travel to, a semantic encapsulation of a position
 public class House {
     // Private Data Members
     private Vector2 pos;

@@ -3,12 +3,15 @@ package Salesbot;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// A greedy implementation of the Salesbot
 public class SalesbotGreedy extends Salesbot {
 
+    // Constructor
     public SalesbotGreedy(Neighborhood n) {
         super(n);
     }
 
+    // The algorithm that this salesbot implements
     @Override
     public House[] findPath() {
         int size = mHood.getNumHouses();

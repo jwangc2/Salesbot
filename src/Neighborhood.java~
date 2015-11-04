@@ -13,16 +13,22 @@ public class Neighborhood {
         houses = new House[Neighborhood.NumHouses];
     }
 
-    // Public Member Methods
+    // Mutators
     public void setHouseAt(int index, House newHouse) {
         houses[index] = newHouse;
     }
 
+    // Accessors
     public House getHouseAt(int index) {
         return houses[index];
     }
 
     public House[] getHouses() {
+        int size = getNumHouses();
+        House[] houseCopies = new House[size];
+        for (int i = 0; i < size; i ++) {
+            houseCopies[i] = new House(houses[i]);
+        }
         return houses;
     }
 

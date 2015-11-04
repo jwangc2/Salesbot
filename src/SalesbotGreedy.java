@@ -3,6 +3,8 @@ package Salesbot;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// TODO: Simplify algorithm (use basic sorting)
+
 // A greedy implementation of the Salesbot
 public class SalesbotGreedy extends Salesbot {
 

@@ -14,6 +14,11 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 
+// TODO: Calculate total angle cost
+// TODO: Improve UI with re-seeding and re-drawing
+// TODO: Add layers for different Salesbots
+// TODO: Improve clarity of visuals
+
 // The simulator and application
 public class SaleSim extends Application {
 
@@ -77,6 +82,7 @@ public class SaleSim extends Application {
             int xpos = random.nextInt(grid_w) - (grid_w / 2);
             int ypos = random.nextInt(grid_h) - (grid_h / 2);
             n.setHouseAt(i, new House(xpos, ypos));
+            System.out.println("Created a house at: " + new Vector2(xpos, ypos));
         }
 
         // Draw the grid
@@ -175,7 +181,7 @@ public class SaleSim extends Application {
     }
 
     private double gridToCanvasY(int coord) {
-        return ( yoff + (coord * grid_size) );
+        return ( yoff + (coord * grid_size * -1) );
     }
 
     private double calcTotalDistance(Vector2 start, House[] path, int len) {

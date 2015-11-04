@@ -14,6 +14,10 @@ public class House {
         this.pos = pos;
     }
 
+    public House(House h) {
+        this.pos = h.getPosition();
+    }
+
     // Public Member Methods
     public Vector2 getPosition() {
         return new Vector2(pos);

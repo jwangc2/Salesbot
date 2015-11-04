@@ -24,6 +24,11 @@ public class Neighborhood {
     }
 
     public House[] getHouses() {
+        int size = getNumHouses();
+        House[] houseCopies = new House[size];
+        for (int i = 0; i < size; i ++) {
+            houseCopies[i] = new House(houses[i]);
+        }
         return houses;
     }
 
