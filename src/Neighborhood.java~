@@ -27,7 +27,7 @@ public class Neighborhood {
         int size = getNumHouses();
         House[] houseCopies = new House[size];
         for (int i = 0; i < size; i ++) {
-            houseCopies[i] = new House(houses[i]);
+            houseCopies[i] = new House(houses[i].getPosition());
         }
         return houses;
     }
