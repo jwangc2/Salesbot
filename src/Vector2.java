@@ -34,6 +34,25 @@ public class Vector2 {
         return new Vector2(this.x * c, this.y * c);
     }
 
+    public int dot(Vector2 other) {
+        return ( (this.x * other.x) + (this.y * other.y) );
+    }
+
+    public double magnitude() {
+        return Math.sqrt(Math.pow(y, 2) + Math.pow(x, 2));
+    }
+
+    public double angle() {
+        return Math.atan2(y, x) * (180.0 / Math.PI);
+    }
+
+    public double angleBetween(Vector2 other) {
+        double numer = (double) this.dot(other);
+        double denom = this.magnitude() * other.magnitude();
+        double rad = Math.acos(numer / denom);
+        return ( rad * (180.0 / Math.PI) );
+    }
+
     @Override
     public String toString() {
         return "(" + this.x + ", " + this.y + ")";

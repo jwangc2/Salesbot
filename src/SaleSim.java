@@ -14,7 +14,6 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 
-// TODO: Calculate total angle cost
 // TODO: Improve UI with re-seeding and re-drawing
 // TODO: Add layers for different Salesbots
 // TODO: Improve clarity of visuals
@@ -160,6 +159,7 @@ public class SaleSim extends Application {
         gc.setLineWidth(1);
         gc.setStroke(Color.GRAY);
         System.out.println("Total Distance: " + calcTotalDistance(s.getPosition(), path, s.getHood().getNumHouses()));
+        System.out.println("Total Angle of Turns: " + calcTotalAngles(s.getPosition(), path, s.getHood().getNumHouses()));
     }
 
     // Draw a circle (grid positions)
@@ -190,5 +190,30 @@ public class SaleSim extends Application {
             total += Math.sqrt(Vector2.distanceSq(path[i - 1].getPosition(), path[i].getPosition()));
         }
         return total;
+    }
+
+    private double calcTotalAngles(Vector2 start, House[] path, int len) {
+        double total = getAngleABC(new House(start), path[0], path[1]);
+        // System.out.print("A: " + total);
+
+        for (int i = 0; i < len - 2; i ++) {
+            double a = getAngleABC(path[i], path[i + 1], path[i + 2]);
+            total += a;
+            // System.out.print(", " + a);
+        }
+        // System.out.println();
+
+        return total;
+    }
+
+    private double getAngleABC(House ha, House hb, House hc) {
+        Vector2 vec1 = hb.getPosition().sub(ha.getPosition());
+        Vector2 vec2 = hc.getPosition().sub(hb.getPosition());
+
+        //double a = Math.abs(vec1.angle() - vec2.angle());
+        //a = (a + 180) % 360 - 180;
+        double a = vec1.angleBetween(vec2);
+
+        return Math.abs(a);
     }
 }
